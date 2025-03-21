@@ -8,6 +8,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { userNotExist } from "../redux/reducer/userReducer"
 import Exposure from "./Exposure"
 import DepositWithdrawal from "../pages/DepositWithdrawl"
+import { FaMoneyBill } from "react-icons/fa"
 
 // Extracted NavItem component to prevent re-renders of all items
 const NavItem = memo(({ item, isActive }) => {
@@ -48,7 +49,7 @@ const WalletInfo = memo(({ wallet, exposure }) => {
       <span className="text-white flex flex-col w-full text-sm">
         <span className="flex gap-1 justify-start items-center"> </span>
         Balance : {wallet.toFixed(2)}
-        <span className="">Exposure : -{exposure}</span>
+        <span className="">Exposure : -{exposure.toFixed(2)}</span>
       </span>
     </div>
   )
@@ -79,7 +80,7 @@ const ProfileDropdown = memo(({ isOpen, toggleDropdown, user, onLogout }) => {
         <User className="h-4 w-4" />
         Profile
       </button>
-      <DepositWithdrawal/>
+
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-[rgb(var(--color-primary-dark))] rounded-lg shadow-lg py-1 z-10">
@@ -126,11 +127,11 @@ const MobileProfileDropdown = memo(({ isOpen, toggleDropdown, user, onLogout }) 
     <div className="relative profile-dropdown">
       <button
         onClick={toggleDropdown}
-        className="text-white text-sm font-medium bg-[rgb(var(--color-primary-dark))] px-8 py-1 rounded-md hover:bg-[rgb(var(--color-primary-darker))] transition-colors"
+        className="text-white text-sm font-medium bg-[rgb(var(--color-primary-dark))] w-28 rounded-md hover:bg-[rgb(var(--color-primary-darker))] transition-colors"
       >
         Profile
       </button>
-      <DepositWithdrawal/>
+
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-40 bg-[rgb(var(--color-primary-dark))] rounded-lg shadow-lg py-1 z-10">
@@ -188,6 +189,7 @@ const NavbarComponent = ({ toggleSidebar, showsidebar }) => {
       { name: "Slot", href: "/slot", icon: Joystick },
       { name: "Fantasy", href: "/fantasy", icon: Trophy },
       { name: "MyBets", href: "/mybets", icon: History },
+      { name: "Withdrawl/Deposit", href: "/deposit-withdrawl", icon: FaMoneyBill },
     ],
     [],
   )
@@ -247,7 +249,7 @@ const NavbarComponent = ({ toggleSidebar, showsidebar }) => {
             ) : (
               <Menu className="h-6 w-6 text-white" onClick={toggleSidebar} />
             )}
-            <h1 className="flex text-white font-semibold">SHAKTIEX</h1>
+            <h1 className="flex text-xs md:text-base text-white font-semibold">SHAKTIEX</h1>
           </div>
 
           <div className="flex items-center gap-2">
