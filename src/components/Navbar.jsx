@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { userNotExist } from "../redux/reducer/userReducer"
 import Exposure from "./Exposure"
-import DepositWithdrawal from "../pages/DepositWithdrawl"
 import { FaMoneyBill } from "react-icons/fa"
 
 // Extracted NavItem component to prevent re-renders of all items
@@ -75,7 +74,7 @@ const ProfileDropdown = memo(({ isOpen, toggleDropdown, user, onLogout }) => {
     <div className="relative profile-dropdown">
       <button
         onClick={toggleDropdown}
-        className="flex items-center gap-2 text-white bg-[rgb(var(--color-primary-dark))] px-8 py-1 text-xs rounded-lg transition-colors"
+        className="flex items-center gap-2 text-white bg-[rgb(var(--color-primary-dark))]  px-4 py-2 text-xs rounded-lg transition-colors"
       >
         <User className="h-4 w-4" />
         Profile
@@ -127,7 +126,7 @@ const MobileProfileDropdown = memo(({ isOpen, toggleDropdown, user, onLogout }) 
     <div className="relative profile-dropdown">
       <button
         onClick={toggleDropdown}
-        className="text-white text-sm font-medium bg-[rgb(var(--color-primary-dark))] w-28 rounded-md hover:bg-[rgb(var(--color-primary-darker))] transition-colors"
+        className="text-white text-sm font-medium bg-[rgb(var(--color-primary-dark))] px-2 py-1 rounded-md hover:bg-[rgb(var(--color-primary-darker))] transition-colors"
       >
         Profile
       </button>
@@ -195,8 +194,13 @@ const NavbarComponent = ({ toggleSidebar, showsidebar }) => {
   )
 
   // Memoize filtered nav items
-  const filteredNavItems = useMemo(() => navItems.filter((item) => item.name !== "MyBets" || user), [navItems, user])
-
+  const filteredNavItems = useMemo(() => 
+    navItems.filter((item) => 
+      (item.name !== "MyBets" && item.name !== "Withdrawl/Deposit") || user
+    ), 
+    [navItems, user]
+  );
+  
   // Use useCallback for event handlers
   const toggleProfileDropdown = useCallback(() => {
     setProfileDropdownOpen((prev) => !prev)
