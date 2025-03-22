@@ -61,7 +61,7 @@ const MobileWalletInfo = memo(({ wallet, exposure }) => {
     <div className="flex items-center w-fit gap-2 rounded-full px-4 py-1.5">
       <span className="text-white flex flex-col w-full text-xs">
         Balance : {wallet.toFixed(2)}
-        <span className="">Exposure : -{exposure}</span>
+        <span className="">Exposure : -{exposure.toFixed(2)}</span>
       </span>
     </div>
   )
