@@ -378,12 +378,18 @@ const MatchOdds = ({ eventId, onBetSelect, stake, setStake, showBetSlip, marginA
       {showBetSlip && (
         <div className="lg:hidden my-4">
           {selectedBet ? (
-            <BetSlip
-              match={selectedBet}
-              onClose={() => setSelectedBet(null)}
-              setStake={setStake}
-              betPlaced={betPlaced}
-            />
+           <div className="fixed lg:hidden p-2 inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div className="bg-white rounded-lg shadow-lg w-full max-w-md">
+                  <BetSlip
+                    match={selectedBet}
+                    onClose={() => {
+                      setSelectedBet(null);
+                    }}
+                    setStake={setStake}
+                    betPlaced={betPlaced}
+                  />
+                </div>
+              </div>
           ) : (
             <></>
           )}
