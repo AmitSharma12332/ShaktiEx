@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { server } from "../../constants/config";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Users() {
   const [isModalOpen, setIsModalOpen] = useState(false);
