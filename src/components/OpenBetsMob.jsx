@@ -51,10 +51,10 @@ const OpenBetsMob = ({ eventId, isLoadingTransactions = false }) => {
     fetchTransactions();
 
     // Poll for updates every 5 seconds
-    const interval = setInterval(fetchTransactions, 5000);
+    // const interval = setInterval(fetchTransactions, 5000);
 
-    return () => clearInterval(interval);
-  }, [fetchTransactions]);
+    // return () => clearInterval(interval);
+  }, [fetchTransactions, isOpen]);
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
