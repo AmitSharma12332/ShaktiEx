@@ -32,12 +32,18 @@ const OddsBox = ({ odds, value, type, onClick, isSelected }) => {
         isSelected ? selectedColor : bgColor
       } ${hoverColor} sm:w-12 lg:min-w-[100px] min-w-[100px] md:w-16 rounded flex flex-col items-center justify-center transition-colors p-1`}
     >
-      <span className={`font-semibold text-sm ${isSelected ? "text-white" : "text-[rgb(var(--color-text-primary))]"}`}>
-        {odds?.toFixed(2)}
-      </span>
-      <span className={`text-[10px] lg:text-xs ${isSelected ? "text-white" : "text-[rgb(var(--color-text-primary))]"}`}>
-        {Math.floor(value)}
-      </span>
+      {odds > 0 ? (
+        <>
+          <span className={`font-semibold text-sm ${isSelected ? "text-white" : "text-[rgb(var(--color-text-primary))]"}`}>
+            {odds?.toFixed(2)}
+          </span>
+          <span className={`text-[10px] lg:text-xs ${isSelected ? "text-white" : "text-[rgb(var(--color-text-primary))]"}`}>
+            {Math.floor(value)}
+          </span>
+        </>
+      ) : (
+        <span className="text-xs font-semibold text-[rgb(var(--color-text-muted))]">Suspended</span>
+      )}
     </button>
   )
 }
@@ -311,7 +317,7 @@ const BookmakerComponent = ({
       return
     }
 
-    if (!market || !type || value <= 0) {
+    if (!market || !type) {
       setSelectedBet(null)
       setSelectedOdd(null)
       onBetSelect(null)
