@@ -305,46 +305,56 @@ const Allbets = () => {
                 const isProfit = bet.status === "won"
              return (
               <tr key={bet._id} className="hover:bg-[rgb(var(--color-background-hover))] transition-colors">
-                <td className="px-6 py-4 text-sm text-[rgb(var(--color-text-primary))]">{bet.match}</td>
-                <td className="px-4 py-3 text-sm text-[rgb(var(--color-text-primary))]">
-                  {bet.selection}
-                  {bet?.fancyNumber && ` (${bet.fancyNumber})`}
+              <td className="px-6 py-4 text-sm text-[rgb(var(--color-text-primary))]">{bet.match}</td>
+              <td className="px-4 py-3 text-sm text-[rgb(var(--color-text-primary))]">
+                {bet.selection}
+                {bet?.fancyNumber && ` (${bet.fancyNumber})`}
+              </td>
+              <td className="px-6 py-4 text-sm text-[rgb(var(--color-text-primary))]">{bet.type}</td>
+              <td className="px-6 py-4 text-sm text-[rgb(var(--color-text-primary))]">{bet.odds}</td>
+              <td className="px-6 py-4 text-sm text-[rgb(var(--color-text-primary))]">{bet.stake}</td>
+              <td className="px-6 py-4 text-sm text-[rgb(var(--color-text-primary))]">{bet.category}</td>
+              <td
+                  className={`px-4 py-3 text-sm ${
+                  bet.status === "cancelled"
+                    ? "text-gray-500 font-medium"
+                    : isProfit
+                    ? "text-green-600 font-medium"
+                    : bet.status === "lost"
+                    ? "text-red-600 font-medium"
+                    : "text-[rgb(var(--color-text-primary))]"
+                  }`}
+                >
+                  {bet.status === "cancelled" ? "NA" : profitLoss}
                 </td>
-                <td className="px-6 py-4 text-sm text-[rgb(var(--color-text-primary))]">{bet.type}</td>
-                <td className="px-6 py-4 text-sm text-[rgb(var(--color-text-primary))]">{bet.odds}</td>
-                <td className="px-6 py-4 text-sm text-[rgb(var(--color-text-primary))]">{bet.stake}</td>
-                <td className="px-6 py-4 text-sm text-[rgb(var(--color-text-primary))]">{bet.category}</td>
+              <td className="px-4 py-3 text-sm text-[rgb(var(--color-text-primary))]">
+                {format(new Date(bet.createdAt), "yyyy-MM-dd HH:mm:ss")}
+              </td>
+              <td className="px-6 py-4 text-sm">
+                <div className="relative">
                 <td
-                      className={`px-4 py-3 text-sm ${isProfit ? "text-green-600 font-medium" : bet.status === "lost" ? "text-red-600 font-medium" : "text-[rgb(var(--color-text-primary))]"}`}
-                    >
-                      {profitLoss}
-                    </td>
-                <td className="px-4 py-3 text-sm text-[rgb(var(--color-text-primary))]">
-                  {format(new Date(bet.createdAt), "yyyy-MM-dd HH:mm:ss")}
+                  className={`capitalize w-24 text-center ${
+                  bet.status === "pending"
+                    ? "bg-yellow-100 text-yellow-800"
+                    : bet.status === "lost"
+                    ? "bg-red-100 text-red-800"
+                    : bet.status === "cancelled"
+                    ? "bg-gray-100 text-gray-800"
+                    : "bg-green-100 text-green-800"
+                  } rounded-lg px-4 py-1`}
+                >
+                  {bet.status}
                 </td>
-                <td className="px-6 py-4 text-sm">
-                  <div className="relative">
-                    <td
-                      className={`capitalize w-24 text-center ${
-                        bet.status === "pending"
-                          ? "bg-yellow-100 text-yellow-800"
-                          : bet.status === "lost"
-                            ? "bg-red-100 text-red-800"
-                            : "bg-green-100 text-green-800"
-                      } rounded-lg px-4 py-1`}
-                    >
-                      {bet.status}
-                    </td>
-                  </div>
-                </td>
-                <td className="px-6 py-4 text-sm">
-                  <button
-                    onClick={() => openSettleModal(bet._id)}
-                    className="rounded bg-[rgb(var(--color-primary))] px-3 py-1.5 text-white hover:bg-[rgb(var(--color-primary-dark))] focus:outline-none transition-colors"
-                  >
-                    Settle
-                  </button>
-                </td>
+                </div>
+              </td>
+              <td className="px-6 py-4 text-sm">
+                <button
+                onClick={() => openSettleModal(bet._id)}
+                className="rounded bg-[rgb(var(--color-primary))] px-3 py-1.5 text-white hover:bg-[rgb(var(--color-primary-dark))] focus:outline-none transition-colors"
+                >
+                Settle
+                </button>
+              </td>
               </tr>
             )})}
           </tbody>
